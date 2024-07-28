@@ -3,23 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Video Player</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <title>Video Platform</title>
+  <style>
+    /* Youtubeを参考にしたデザイン */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #282828;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+    .search-bar input {
+      padding: 5px;
+      border-radius: 3px;
+      border: none;
+    }
+    .search-bar button {
+      background-color: #CC0000;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 20px;
+      padding: 20px;
+    }
+    .video-item {
+      position: relative;
+      cursor: pointer;
+    }
+    .video-item video {
+      width: 100%;
+      height: auto;
+    }
+    .video-item .title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 5px;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="video-player">
-      <video id="video-element" controls>
-        <source src="videos/sample.mp4" type="video/mp4">
-        お使いのブラウザはHTML5 videoタグをサポートしていません。
-      </video>
+  <header>
+    <div class="logo">Video Platform</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search">
+      <button>Search</button>
     </div>
-    <div class="video-list">
-      <div class="video-thumbnail-list" id="video-thumbnail-list">
-      </div>
-    </div>
+  </header>
+  <div class="video-list">
+    <!-- 動画をランダムに表示 -->
+    <script>
+      const videoFiles = ['video1.mp4', 'video2.mp4', 'video3.mp4', 'video4.mp4', 'video5.mp4'];
+      const videoList = document.querySelector('.video-list');
+
+      videoFiles.forEach(file => {
+        const videoItem = document.createElement('div');
+        videoItem.classList.add('video-item');
+
+        const video = document.createElement('video');
+        video.src = `mp4/${file}`;
+        video.controls = true;
+        video.autoplay = false;
+
+        const title = document.createElement('div');
+        title.classList.add('title');
+        title.textContent = file.replace('.mp4', '');
+
+        videoItem.appendChild(video);
+        videoItem.appendChild(title);
+        videoList.appendChild(videoItem);
+      });
+    </script>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>
